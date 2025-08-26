@@ -1,0 +1,148 @@
+.login-container {
+	max-width: 400px;
+	margin: 60px auto;
+	padding: 30px;
+	border-radius: 20px;
+	background-color: white;
+	box-shadow: 0 0 20px rgba(0, 123, 255, 0.1);
+}
+
+.btn-easywash {
+	background-color: rgb(51, 153, 255);
+	color: white;
+	border: none;
+}
+
+.btn-easywash:hover {
+	background-color: #267acc;
+}
+
+.logo {
+	display: block;
+	margin: 0 auto 20px auto;
+	max-width: 100px;
+}
+
+
+.btn-easywash {
+	background-color: #3399ff;
+	color: white;
+	border: none;
+}
+
+.btn-easywash:hover {
+	background-color: #267acc;
+}
+
+.logo {
+	display: block;
+	margin: 0 auto 20px auto;
+	max-width: 100px;
+}
+
+.text-shadow {
+	text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+.card-hover {
+	transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.card-hover:hover {
+	transform: scale(1.03);
+	filter: brightness(0.8);
+}
+
+
+
+.sidebar {
+	position: fixed;
+	top: 56px;
+	left: 0;
+	width: 250px;
+	height: calc(100% - 56px);
+	background-color: #f8f9fa;
+	padding: 1rem;
+	overflow-y: auto;
+	transition: transform 0.3s ease;
+	z-index: 1000;
+}
+
+.sidebar.hidden {
+	transform: translateX(-100%);
+}
+
+.sidebar a {
+	display: block;
+	padding: 0.5rem 0;
+	color: #333;
+	text-decoration: none;
+}
+
+.sidebar a:hover {
+	text-decoration: underline;
+}
+
+.content.shifted {
+	margin-left: 250px;
+}
+
+.content {
+	flex-grow: 1;
+	padding: 2rem;
+}
+
+.sidebar h5 {
+	font-weight: bold;
+}
+
+.sidebar .text-danger {
+	margin-top: 1rem;
+	display: block;
+}
+.dropdown-menu {
+  min-width: 220px;
+  z-index: 1050;
+}
+
+body {
+
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+footer {
+  margin-bottom: 80px; 
+}
+
+
+.form-control {
+  height: auto;     
+  font-size: 1rem !important;  
+  padding: 0.75rem 0.75rem !important; 
+  min-height: 3rem !important;       
+}
+
+.input-group .btn-eye {
+  padding: 0.5rem 0.75rem;     /* optisch an Input angepasst */
+  font-size: 1rem;
+  line-height: 1.2;
+  height: auto;   
+}
+
+
+
+
+/* Responsive Design für schmale Bildschirme */
+@media (max-width: 992px) {
+  .register-page .register-container .row {
+    flex-wrap: wrap;
+  }
+
+}

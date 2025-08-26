@@ -1,0 +1,17 @@
+# Versteckte Environment-Datei
+.env
+
+# Composer Vendor-Verzeichnis
+/vendor/
+
+# Cache / temporäre Dateien
+/smarty/templates_c/
+/smarty/cache/
+
+# OS/IDE spezifisches Zeug
+.DS_Store
+Thumbs.db
+.settings/
+.project
+.idea/
+*.swp
