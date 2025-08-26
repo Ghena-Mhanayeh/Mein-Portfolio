@@ -13,6 +13,9 @@ COPY . /var/www/html/
 RUN mkdir -p /var/www/html/templates_c /var/www/html/cache \
     && chown -R www-data:www-data /var/www/html
 
+# MySQL-Client für migrations
+RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib/apt/lists/*
+
 # EntryPoint sorgt dafür, dass Apache auf dem von Railway vorgegebenen $PORT lauscht
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
