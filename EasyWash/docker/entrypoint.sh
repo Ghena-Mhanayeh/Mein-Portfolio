@@ -35,10 +35,10 @@ if [ "${RUN_MIGRATIONS}" = "true" ]; then
   echo "[migrate] checking schema on ${DB_HOST}:${DB_PORT}/${DB_NAME} ..."
 
   # Prüfe, ob eine Kern-Tabelle existiert (<<< HIER ANPASSEN, z. B. 'users' oder 'bestellungen' >>>)
-  Kunde="${Kunde:-users}"
+  MARKER_TABLE="${Kunde:-users}"
 
   if ! mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" \
-       -e "SELECT 1 FROM information_schema.tables WHERE table_schema='${DB_NAME}' AND table_name='${Kunde}' LIMIT 1;" \
+       -e "SELECT 1 FROM information_schema.tables WHERE table_schema='${DB_NAME}' AND table_name='${MARKER_TABLE}' LIMIT 1;" \
        >/dev/null 2>&1; then
     if [ -f /var/www/html/sql/schema.sql ]; then
       echo "[migrate] importing sql/schema.sql ..."
