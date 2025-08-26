@@ -5,6 +5,18 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__); // Root = Ordner mit .env
 $dotenv->safeLoad(); // lädt .env, ohne Exception wenn sie fehlt
 
+if (!getenv('DB_HOST') && getenv('DATABASE_URL')) {
+    $p = parse_url(getenv('DATABASE_URL'));
+    if ($p) {
+        putenv('DB_HOST=' . ($p['host'] ?? '127.0.0.1'));
+        putenv('DB_PORT=' . ($p['port'] ?? '3306'));
+        putenv('DB_NAME=' . ltrim($p['path'] ?? '/easywash', '/'));
+        putenv('DB_USER=' . ($p['user'] ?? 'root'));
+        putenv('DB_PASSWORD=' . ($p['pass'] ?? ''));
+    }
+}
+
+
 function envv($key, $default = null) {
     $val = getenv($key);
     return ($val === false || $val === null || $val === '') ? $default : $val;
@@ -29,12 +41,22 @@ class DbFunctions {
     
    
     public static function connectWithDatabase() {
-        $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-        if (!$link) {
+        $link = mysqli_init();
+        
+        // TLS erzwingen (wie --ssl-mode=REQUIRED)
+        if (defined('MYSQLI_OPT_SSL_MODE') && defined('MYSQLI_CLIENT_SSL_REQUIRED')) {
+            mysqli_options($link, MYSQLI_OPT_SSL_MODE, MYSQLI_CLIENT_SSL_REQUIRED);
+        }
+        
+        mysqli_options($link, MYSQLI_OPT_CONNECT_TIMEOUT, 5);
+        
+        if (!mysqli_real_connect($link, DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT)) {
             throw new RuntimeException('DB-Verbindung fehlgeschlagen: ' . mysqli_connect_error());
         }
+        mysqli_set_charset($link, 'utf8mb4');
         return $link;
     }
+    
     
     
     public static function getAssociativeResultArray($link, $query) {
