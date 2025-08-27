@@ -43,19 +43,32 @@ class DbFunctions {
     public static function connectWithDatabase() {
         $link = mysqli_init();
         
-        // TLS erzwingen (wie --ssl-mode=REQUIRED)
-        if (defined('MYSQLI_OPT_SSL_MODE') && defined('MYSQLI_CLIENT_SSL_REQUIRED')) {
-            mysqli_options($link, MYSQLI_OPT_SSL_MODE, MYSQLI_CLIENT_SSL_REQUIRED);
+        // TLS aktivieren, aber Zertifikatsprüfung ausschalten
+        if (defined('MYSQLI_OPT_SSL_VERIFY_SERVER_CERT')) {
+            mysqli_options($link, MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, false);
+        }
+        if (defined('MYSQLI_CLIENT_SSL')) {
+            // Flag für SSL aktivieren
+            $client_flags = MYSQLI_CLIENT_SSL;
+        } else {
+            $client_flags = 0;
         }
         
         mysqli_options($link, MYSQLI_OPT_CONNECT_TIMEOUT, 5);
         
-        if (!mysqli_real_connect($link, DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT)) {
-            throw new RuntimeException('DB-Verbindung fehlgeschlagen: ' . mysqli_connect_error());
-        }
-        mysqli_set_charset($link, 'utf8mb4');
-        return $link;
+        if (!mysqli_real_connect(
+            $link,
+            DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT,
+            null,            // socket
+            $client_flags    // SSL-Flag
+            )) {
+                throw new RuntimeException('DB-Verbindung fehlgeschlagen: ' . mysqli_connect_error());
+            }
+            
+            mysqli_set_charset($link, 'utf8mb4');
+            return $link;
     }
+    
     
     
     

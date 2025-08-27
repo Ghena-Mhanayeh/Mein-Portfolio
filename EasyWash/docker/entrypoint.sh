@@ -40,13 +40,13 @@ if [ "${RUN_MIGRATIONS}" = "true" ]; then
   # <<< HIER an dein Schema anpassen (z. B. 'users' oder 'bestellungen') >>>
   MARKER_TABLE="${MARKER_TABLE:-users}"
 
-  if ! mysql --ssl --protocol=TCP \
+  if ! mysql --ssl --ssl-verify-server-cert=OFF --protocol=TCP \
         -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" \
         -e "SELECT 1 FROM information_schema.tables WHERE table_schema='${DB_NAME}' AND table_name='${MARKER_TABLE}' LIMIT 1;" \
         >/dev/null 2>&1; then
     if [ -f /var/www/html/sql/schema.sql ]; then
       echo "[migrate] importing sql/schema.sql ..."
-      mysql --ssl --protocol=TCP \
+      mysql --ssl --ssl-verify-server-cert=OFF --protocol=TCP \
         -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" \
         < /var/www/html/sql/schema.sql
       echo "[migrate] import done."
