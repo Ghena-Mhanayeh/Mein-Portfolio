@@ -1,6 +1,15 @@
 # --- Basis-Image 
 FROM php:8.2-apache
 
+# PHP-Extensions für Bilder
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-png \
+    && docker-php-ext-install -j$(nproc) gd
+
+
 # PHP-Extensions & Apache-Module
 RUN docker-php-ext-install pdo pdo_mysql mysqli \
  && a2enmod rewrite
