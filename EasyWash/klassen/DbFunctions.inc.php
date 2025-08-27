@@ -2,8 +2,8 @@
 
 // require __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__); // Root = Ordner mit .env
-$dotenv->safeLoad(); // lädt .env, ohne Exception wenn sie fehlt
+// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__); // Root = Ordner mit .env
+// $dotenv->safeLoad(); // lädt .env, ohne Exception wenn sie fehlt
 
 if (!getenv('DB_HOST') && getenv('DATABASE_URL')) {
     $p = parse_url(getenv('DATABASE_URL'));
