@@ -37,8 +37,8 @@ Derzeit lerne ich selbstständig den Umgang mit der **React-Bibliothek**, da sie
 ![EasyWash Startseite](images/EasyWash-Warenkorb.png)
 
 - **Tech-Stack:** PHP, MySQL, Smarty, Bootstrap, HTML, CSS  
-- [Code ansehen](https://github.com/deinuser/moebelservice)  
-- [Live-Demo](https://moebelservice-demo.netlify.app)  
+- [Code ansehen](https://github.com/Ghena-Mhanayeh/Mein-Portfolio)  
+- [Live-Demo](https://mein-portfolio-production.up.railway.app/)  
 
 ---
 
