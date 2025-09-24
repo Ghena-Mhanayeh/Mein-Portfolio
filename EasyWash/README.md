@@ -21,6 +21,7 @@ Das Projekt ist Docker- und Railway-bereit.
 ---
 
 ## Projektstruktur
+```
 easywash/
 ├── docker/ # entrypoint.sh, Docker-Hilfsdateien
 ├── sql/ # schema.sql (DB Struktur)
@@ -31,6 +32,7 @@ easywash/
 ├── README.md
 ├── Dockerfile
 └── .env.example
+```
 ---
 
 ## Tech Stack
